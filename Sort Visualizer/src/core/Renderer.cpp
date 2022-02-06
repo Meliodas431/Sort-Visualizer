@@ -42,11 +42,11 @@ void Renderer::Init() {
     s_Data.m_VA->AddBuffer(*s_Data.m_VB, layout);
     s_Data.m_IB->UpdateIB(s_Data.Indeces, s_Data.MaxIndexCount);
                       
-    constexpr uint8_t color = 0xFFFFFFFF;
+    constexpr uint8_t color = 0xFFFFFF;
     s_Data.m_Texture->CreateTexture(GL_TEXTURE_2D, GL_ALPHA8, 1, 1, GL_ALPHA, &color);
     s_Data.m_Texture->Bind(0);
 
-    s_Data.m_Shader->Create("resources/shader/Basic.shader");
+    s_Data.m_Shader->Create("resources/shader/Quad.shader");
     s_Data.m_Shader->Bind();
     glm::mat4 mvp = m_Proj;
     s_Data.m_Shader->SetUniformMat4f("m_MVP", mvp);

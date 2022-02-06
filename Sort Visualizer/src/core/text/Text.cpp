@@ -14,7 +14,7 @@ struct Character {
     float      Offset;
     glm::ivec2 Size;      // Размеры глифа
     glm::ivec2 Bearing;   // Смещение верхней левой точки глифа  
-    uint32_t   Layer;
+    float      Layer;
     GLuint     Advance;   // Горизонтальное смещение до начала следующего глифа
 };
 

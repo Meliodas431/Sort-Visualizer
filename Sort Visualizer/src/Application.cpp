@@ -57,21 +57,28 @@ void Application::Run() {
     Menu menu;
     Array array(200);
     Visualizer visualizer(array);  
-
+ 
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
-
+ 
         GLCall(glClearColor(0.2f, 0.2f, 0.2f, 1.f));
         GLCall(glClear(GL_COLOR_BUFFER_BIT));
-
-        Renderer::BeginScene();
+     
+        Input::ProcessInput();       
+        Renderer::BeginScene();  
         menu.Draw();
-        if (menu.menuState.m_reset) {
-            array.ResetArray();
+        visualizer.SetDelay(menu.menuState.delay);
+        if (menu.menuState.size != array.m_Size) {
+            array.ResetArray(menu.menuState.size);
+            visualizer.Reset();
+            menu.menuState.play = false;
+        }
+        if (menu.menuState.reset) {
+            array.ResetArray(array.m_Size);
             visualizer.Reset();
         }
-        else if (menu.menuState.m_play) {
-            visualizer.CreateStates(menu.menuState.m_type);
+        else if (menu.menuState.play) {
+            visualizer.CreateStates(menu.menuState.type);
             visualizer.Play();
         }
         else {
